@@ -1,7 +1,3 @@
-/*
- * @author yui
- *
- */
 package com.ocinpp.tools.model;
 
 import org.junit.Assert;
