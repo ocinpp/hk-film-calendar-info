@@ -7,23 +7,23 @@ public class EventTest {
 
 	@Test
 	public void testGetDuration() {
-		Event e = new Event();
+		Event e = new Event(2017);
 		e.setIntro("Japan / 2017 / 123 分鐘 / DCP");
 		Assert.assertEquals(123, e.getDuration().intValue());
 		
-		e = new Event();
+		e = new Event(2017);
 		e.setIntro("Japan / 2017 / 12 分鐘 / DCP");
 		Assert.assertEquals(12, e.getDuration().intValue());
 		
-		e = new Event();
+		e = new Event(2017);
 		e.setIntro("Japan / 2017 / 1 分鐘 / DCP");
 		Assert.assertEquals(1, e.getDuration().intValue());
 		
-		e = new Event();
+		e = new Event(2017);
 		e.setIntro("Japan / 2017 / / DCP");
 		Assert.assertNull(e.getDuration());
 		
-		e = new Event();
+		e = new Event(2017);
 		e.setIntro("Japan / 2017 / DCP");
 		Assert.assertNull(e.getDuration());
 	}
