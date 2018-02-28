@@ -23,6 +23,13 @@ public class Event {
 	private Integer duration;
 	private String url;
 	
+	// stores the year of the date
+	private Integer year;
+	
+	public Event(Integer year) {
+		this.year = year;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -55,13 +62,13 @@ public class Event {
 	}
 	public void setDate(String date) {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yyyy");
-		this.date = LocalDate.parse(date + "/2017", df);
+		this.date = LocalDate.parse(date + "/" + this.year, df);
 	}
 	public void setDateAndTime(String date, String time) {
 		this.setDate(date);		
 		DateTimeFormatter df2 = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.ENGLISH);
 		df2 = df2.withZone(ZoneId.of("Asia/Hong_Kong"));
-		this.startDateTime = ZonedDateTime.parse(date + "/2017" + " " + time + "", df2);
+		this.startDateTime = ZonedDateTime.parse(date + "/" + this.year + " " + time + "", df2);
 	}
 	public ZonedDateTime getStartDateTime() {
 		return startDateTime;
