@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,12 @@ public class HkiffGoogleCalendarCsvGenerator implements CommandLineRunner {
 	
 	private List<String> movieIds;
 	
-	@Autowired
 	private HkiffReader hkiffReader;
+	
+	@Autowired
+	public HkiffGoogleCalendarCsvGenerator(HkiffReader hkiffReader) {
+		this.hkiffReader = hkiffReader;
+	}	
 	
 	public void setMovieIds(List<String> movieIds) {
 		this.movieIds = movieIds;
@@ -46,7 +51,11 @@ public class HkiffGoogleCalendarCsvGenerator implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		logger.info("HkiffGoogleCalendarCsvGenerator is starting");		
 		
-		List<Event> events = hkiffReader.getEvents(movieIds);
+		List<String> distinctMovieIds = movieIds.stream()
+			     .distinct()
+			     .collect(Collectors.toList());
+		
+		List<Event> events = hkiffReader.getEvents(distinctMovieIds);
 		
 		File outputDir = new File(outputDirectory);
 		if (!outputDir.exists()) {
@@ -70,7 +79,7 @@ public class HkiffGoogleCalendarCsvGenerator implements CommandLineRunner {
 				try {
 					writer.write(String.format("\"%s (%s)\",%s,%s,%s,%s,\"%s%n%s%n%nURL: %s\",\"%s\"", 
 							event.getTitle(), 
-							((event.getCode() != null && !event.getCode().trim().equals("　")) ? event.getCode() : "免費放映"),
+							((event.getCode() != null && event.getCode().replaceAll("　", "").trim().length() > 0) ? event.getCode() : "免費放映"),
 							event.getStartDateTime().format(df1), 
 							event.getStartDateTime().format(df2), 
 							event.getEndDateTime().format(df1), 
