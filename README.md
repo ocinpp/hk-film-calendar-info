@@ -1,4 +1,5 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/ocinpp/hk-film-calendar-info/badge.svg?targetFile=pom.xml)](https://snyk.io/test/github/ocinpp/hk-film-calendar-info?targetFile=pom.xml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Focinpp%2Fhk-film-calendar-info.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Focinpp%2Fhk-film-calendar-info?ref=badge_shield)
 
 # hk-film-calendar-info
 Generate CSV files from film info page to be imported to Calendar. 
